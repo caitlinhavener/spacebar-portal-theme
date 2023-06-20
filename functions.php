@@ -75,9 +75,9 @@ The current Form ID.
 function modify_input_html($content, $field, $value, $lead_id, $form_id){ 
 
     $changed_content = $content;
-   /* echo '<pre>';
+    echo '<pre>';
     var_dump($field);
-    echo '</pre>';*/
+    echo '</pre>';
     
     if ( $field->cssClass == 'material-input' ) { //this class was set in the Gravity form settings > field settings >appearance > custom CSS
         //see Material UI for web implementation documentation. Documentation for the html below: https://m2.material.io/components/text-fields/web#outlined-text
@@ -97,7 +97,11 @@ function modify_input_html($content, $field, $value, $lead_id, $form_id){
         //https://www.php.net/manual/en/control-structures.foreach.php
         //foreach loop $field->choices
             //inside of it, append new string to changed_content with the correct values
-            $changed_content .= '<div class="mdc-radio">
+        foreach ($field->choices as $value) {
+            echo($value);
+
+            $changed_content .= '<div class="mdc-touch-target-wrapper">
+            <div class="mdc-radio mdc-radio--touch">
             <input class="mdc-radio__native-control" type="radio" id="radio-1" name="radios">
             <div class="mdc-radio__background">
               <div class="mdc-radio__outer-circle"></div>
@@ -105,7 +109,8 @@ function modify_input_html($content, $field, $value, $lead_id, $form_id){
             </div>
             <div class="mdc-radio__ripple"></div>
           </div>
-          <label for="radio-1">Radio 1</label>'; //change out Radio 1
+          <label for="radio-1">  ' . $value['text'] . ' </label>'; //change out Radio 1
+        }
         //endforeach
 
         $changed_content .= '</div>';

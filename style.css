@@ -25,3 +25,12 @@ input[type=text] {
     border: unset;
     background: unset;
 }
+
+.gform_wrapper.gravity-theme * {
+    box-sizing: unset;
+  }
+
+  fieldset {
+    display: inline-grid;
+    line-height: 1.5;
+  }
