@@ -74,6 +74,11 @@ The current Form ID.
 
 function modify_input_html($content, $field, $value, $lead_id, $form_id){ 
 
+    $changed_content = $content;
+    echo '<pre>';
+    var_dump($field);
+    echo '</pre>';
+    
     if ( $field->cssClass == 'material-input' ) { //this class was set in the Gravity form settings > field settings >appearance > custom CSS
         //see Material UI for web implementation documentation. Documentation for the html below: https://m2.material.io/components/text-fields/web#outlined-text
         //Check out this field object. This is where we got the cssClass above. https://docs.gravityforms.com/field-object/
@@ -84,9 +89,32 @@ function modify_input_html($content, $field, $value, $lead_id, $form_id){
           <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" value="">
           <span class="mdc-line-ripple"></span>
         </label>';
-
-            return $changed_content; //this is returning the html to the page
     }
+    else if( $field->cssClass == 'material-radio' ){
+        //create the element that the radio buttons are inside of.
+        $changed_content = '<div class="mdc-form-field">';
+
+        //https://www.php.net/manual/en/control-structures.foreach.php
+        //foreach loop $field->choices
+            //inside of it, append new string to changed_content with the correct values
+            $changed_content .= '<div class="mdc-radio">
+            <input class="mdc-radio__native-control" type="radio" id="radio-1" name="radios">
+            <div class="mdc-radio__background">
+              <div class="mdc-radio__outer-circle"></div>
+              <div class="mdc-radio__inner-circle"></div>
+            </div>
+            <div class="mdc-radio__ripple"></div>
+          </div>
+          <label for="radio-1">Radio 1</label>'; //change out Radio 1
+        //endforeach
+
+        $changed_content .= '</div>';
+  //might also be =.
+
+
+    }
+
+    return $changed_content; //this is returning the html to the page
 }
 
 
