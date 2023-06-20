@@ -30,6 +30,9 @@ function child_enqueue_styles() {
 
     wp_enqueue_script('material-ui-script', 'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js', '', false, true);
 
+    wp_enqueue_script('my-scripts', get_stylesheet_directory_uri() . '/assets/my-scripts.js', '', false, true);
+
+
 	wp_enqueue_style( 'spacebar-portal-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_SPACEBAR_PORTAL_VERSION, 'all' );
 
 	/*$result = GFAPI::get_form(2);
@@ -38,7 +41,7 @@ function child_enqueue_styles() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
+add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 30 );
 
 
 /*
@@ -77,41 +80,15 @@ function modify_input_html($content, $field, $value, $lead_id, $form_id){
 
         $changed_content = '<label class="mdc-text-field mdc-text-field--filled">
           <span class="mdc-text-field__ripple"></span>
-          <span class="mdc-floating-label" id="">' . GFCommon::get_label( $field ) . '</span>
+          <span class="mdc-floating-label" id="my-label-id">' . GFCommon::get_label( $field ) . '</span>
           <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" value="">
           <span class="mdc-line-ripple"></span>
         </label>';
 
-//find GFCommon functions (in Gravity developer docs somewhere) for placeholder text and value
-    //finish outputting the html string above with those functions
-
-       // echo (htmlentities($content));
-        echo ('the label is' . GFCommon::get_label( $field ));
-
-
-
-        //This was the original html content that we are modifying...
-        
-        /*<legend class="gfield_label gform-field-label gfield_label_before_complex">
-                Your Name
-                <span class="gfield_required">
-                    <span class="gfield_required gfield_required_text">(Required)</span>
-                </span>
-            </legend>
-            <div class="ginput_complex ginput_container ginput_container--name no_prefix has_first_name no_middle_name has_last_name no_suffix gf_name_has_2 ginput_container_name gform-grid-row" id="input_1_1">
-                <span id="input_1_1_3_container" class="name_first gform-grid-col gform-grid-col--size-auto">
-                    <label for="input_1_1_3" class="gform-field-label gform-field-label--type-sub">First</label>
-                    <input type="text" name="input_1.3" id="input_1_1_3" value="" aria-required="true" autocomplete="given-name" />
-                </span>
-                <span id="input_1_1_6_container" class="name_last gform-grid-col gform-grid-col--size-auto">
-                    <label for="input_1_1_6" class="gform-field-label gform-field-label--type-sub">Last</label> <input type="text" name="input_1.6" id="input_1_1_6" value="" aria-required="true" autocomplete="family-name" />
-                </span>
-            </div>*/
+            return $changed_content; //this is returning the html to the page
     }
-
-    return $changed_content; //this is returning the html to the page
-
 }
+
 
 
 /*
