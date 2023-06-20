@@ -75,9 +75,9 @@ The current Form ID.
 function modify_input_html($content, $field, $value, $lead_id, $form_id){ 
 
     $changed_content = $content;
-    echo '<pre>';
+   /* echo '<pre>';
     var_dump($field);
-    echo '</pre>';
+    echo '</pre>';*/
     
     if ( $field->cssClass == 'material-input' ) { //this class was set in the Gravity form settings > field settings >appearance > custom CSS
         //see Material UI for web implementation documentation. Documentation for the html below: https://m2.material.io/components/text-fields/web#outlined-text
